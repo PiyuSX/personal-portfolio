@@ -8,13 +8,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement
 
     const applyTheme = (theme: string | null) => {
-      const isDark = theme !== "light"
+      const nextTheme = theme === "dark" ? "dark" : "light"
+      const isDark = nextTheme === "dark"
 
       root.classList.toggle("dark", isDark)
       root.style.colorScheme = isDark ? "dark" : "light"
 
-      if (!theme) {
-        localStorage.setItem("theme", "dark")
+      if (theme !== nextTheme) {
+        localStorage.setItem("theme", nextTheme)
       }
     }
 

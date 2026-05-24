@@ -59,7 +59,7 @@ function useCalendarSizing() {
 }
 
 function useDocumentColorScheme() {
-  const [colorScheme, setColorScheme] = useState<"dark" | "light">("dark")
+  const [colorScheme, setColorScheme] = useState<"dark" | "light">("light")
 
   useEffect(() => {
     const updateColorScheme = () => {

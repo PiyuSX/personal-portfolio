@@ -35,7 +35,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${reenieBeanie.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${reenieBeanie.variable} h-full antialiased`}
     >
       <body className="min-h-full overflow-x-hidden">
         <ThemeProvider>{children}</ThemeProvider>
