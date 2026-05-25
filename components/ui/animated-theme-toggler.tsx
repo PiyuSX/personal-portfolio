@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
 import { flushSync } from "react-dom"
 
+import { applyDocumentTheme } from "@/lib/theme"
 import { cn } from "@/lib/utils"
 
 export type TransitionVariant =
@@ -133,6 +135,7 @@ export const AnimatedThemeToggler = ({
   fromCenter = false,
   ...props
 }: AnimatedThemeTogglerProps) => {
+  const { setTheme } = useTheme()
   const shape = variant ?? "circle"
   const [isDark, setIsDark] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -177,13 +180,12 @@ export const AnimatedThemeToggler = ({
     )
 
     const applyTheme = () => {
-      const newTheme = !isDark
       const root = document.documentElement
+      const newTheme = root.classList.contains("dark") ? "light" : "dark"
+      const isNextDark = newTheme === "dark"
 
-      setIsDark(newTheme)
-      root.classList.toggle("dark", newTheme)
-      root.style.colorScheme = newTheme ? "dark" : "light"
-      localStorage.setItem("theme", newTheme ? "dark" : "light")
+      setIsDark(isNextDark)
+      applyDocumentTheme(newTheme, setTheme)
     }
 
     if (typeof document.startViewTransition !== "function") {
@@ -241,7 +243,7 @@ export const AnimatedThemeToggler = ({
         )
       })
     }
-  }, [shape, fromCenter, duration, isDark])
+  }, [shape, fromCenter, duration, setTheme])
 
   return (
     <button

@@ -13,6 +13,8 @@ import { flushSync } from "react-dom"
 import { useTheme } from "next-themes"
 import { RoughNotation } from "react-rough-notation"
 
+import { applyDocumentTheme, getDocumentTheme } from "@/lib/theme"
+
 type Point = {
   x: number
   y: number
@@ -46,14 +48,6 @@ function clampOffset(dx: number, dy: number): Point {
 
 function isPullTarget(target: EventTarget | null) {
   return target instanceof Element && target.closest("[data-pull-target]") != null
-}
-
-function getCurrentTheme(resolvedTheme: string | undefined) {
-  if (typeof document !== "undefined") {
-    return document.documentElement.classList.contains("dark") ? "dark" : "light"
-  }
-
-  return resolvedTheme === "dark" ? "dark" : "light"
 }
 
 export function HangingLampToggle() {
@@ -113,11 +107,11 @@ export function HangingLampToggle() {
 
   const toggleTheme = useCallback(
     (origin?: Point) => {
-      const nextTheme = getCurrentTheme(resolvedTheme) === "dark" ? "light" : "dark"
+      const nextTheme = getDocumentTheme(resolvedTheme) === "dark" ? "light" : "dark"
       playSwitchSound()
 
       const applyTheme = () => {
-        setTheme(nextTheme)
+        applyDocumentTheme(nextTheme, setTheme)
       }
 
       if (
