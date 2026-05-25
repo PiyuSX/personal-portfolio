@@ -20,7 +20,7 @@ const icons = {
 
 export function Hero() {
   return (
-    <section id="home" className="scroll-mt-6 py-16 sm:py-20 lg:py-24">
+    <section id="home" className="relative scroll-mt-6 py-16 sm:py-20 lg:py-24 xl:pt-39">
       <div className="border-b border-border pb-14">
         <BlurFade inView>
           <div className="flex items-center gap-4 xl:mb-16">

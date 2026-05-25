@@ -396,7 +396,7 @@ export function HangingLampToggle() {
           </g>
 
           <g
-            opacity="0.72"
+            className="text-foreground/30"
             pointerEvents="none"
             stroke="currentColor"
             strokeLinecap="round"
@@ -409,7 +409,7 @@ export function HangingLampToggle() {
         </svg>
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-[255px] left-[24px] -rotate-6 font-[var(--font-handwriting)] text-lg leading-none text-foreground/30 transition-colors group-hover:text-foreground/45 dark:text-foreground/35 dark:group-hover:text-foreground/45"
+          className="pointer-events-none absolute top-[255px] left-[24px] -rotate-6 font-[var(--font-handwriting)] text-lg leading-none text-foreground/35 transition-colors"
         >
           <RoughNotation
             animationDuration={900}

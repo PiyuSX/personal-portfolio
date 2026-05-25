@@ -1,11 +1,32 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { GitHubCalendar } from "react-github-calendar"
 
 import { site } from "@/components/data/site"
+import { ActivityConsistencyAnnotation } from "@/components/decorations/SectionAnnotations"
 import { GitHubIcon } from "@/components/icons/BrandIcons"
 import { BlurFade } from "@/components/ui/blur-fade"
+
+function subscribeToHydration() {
+  return () => undefined
+}
+
+function getClientSnapshot() {
+  return true
+}
+
+function getServerSnapshot() {
+  return false
+}
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    subscribeToHydration,
+    getClientSnapshot,
+    getServerSnapshot
+  )
+}
 
 function useCalendarSizing() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -85,17 +106,14 @@ function useDocumentColorScheme() {
 export function GitHubActivity() {
   const { containerRef, sizing } = useCalendarSizing()
   const colorScheme = useDocumentColorScheme()
-  const [isMounted, setIsMounted] = useState(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  const isMounted = useIsMounted()
 
   return (
     <section
       id="github"
-      className="scroll-mt-20 border-b border-border py-12 sm:py-14"
+      className="relative scroll-mt-20 border-b border-border py-12 sm:py-14"
     >
+      <ActivityConsistencyAnnotation />
       <BlurFade inView>
         <div className="grid gap-6 sm:grid-cols-[160px_minmax(0,1fr)]">
           <p className="text-xs font-medium text-muted-foreground uppercase">

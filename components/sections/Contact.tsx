@@ -2,6 +2,7 @@ import { Mail } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 import { contactLinks } from "@/components/data/site"
+import { BuildImproveAnnotation } from "@/components/decorations/SectionAnnotations"
 import {
   GitHubIcon,
   InstagramIcon,
@@ -20,7 +21,8 @@ const icons: Record<(typeof contactLinks)[number]["label"], IconComponent> = {
 
 export function Contact() {
   return (
-    <section id="contact" className="scroll-mt-20 py-12 pb-36 sm:py-14 sm:pb-40">
+    <section id="contact" className="relative scroll-mt-20 py-12 pb-36 sm:py-14 sm:pb-40">
+      <BuildImproveAnnotation />
       <BlurFade inView>
         <div className="grid gap-6 sm:grid-cols-[160px_minmax(0,1fr)]">
           <p className="text-xs font-medium text-muted-foreground uppercase">

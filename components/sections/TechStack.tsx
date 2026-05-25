@@ -1,4 +1,5 @@
 import { site } from "@/components/data/site"
+import { StackThinkingAnnotation } from "@/components/decorations/SectionAnnotations"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { Marquee } from "@/components/ui/marquee"
 import {
@@ -55,7 +56,8 @@ function TechBadge({ skill }: { skill: string }) {
 
 export function TechStack() {
   return (
-    <section id="stack" className="scroll-mt-20 border-b border-border py-12 sm:py-14">
+    <section id="stack" className="relative scroll-mt-20 border-b border-border py-12 sm:py-14">
+      <StackThinkingAnnotation />
       <BlurFade inView>
         <div className="grid gap-6 sm:grid-cols-[160px_minmax(0,1fr)]">
           <p className="text-xs font-medium text-muted-foreground uppercase">

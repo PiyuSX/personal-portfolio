@@ -35,13 +35,9 @@ function Arrow({ className, path, tip }: ArrowProps) {
 }
 
 const noteClass =
-  "absolute whitespace-nowrap font-[var(--font-handwriting)] text-lg leading-none text-foreground/32 dark:text-foreground/70"
+  "absolute whitespace-nowrap font-[var(--font-handwriting)] text-lg leading-none text-foreground/65"
 
-const roughStrokeColor =
-  "color-mix(in oklab, var(--foreground) 33%, transparent)"
-
-const roughHighlightColor =
-  "color-mix(in oklab, var(--foreground) 30%, transparent)"
+const sketchColor = "color-mix(in oklab, var(--foreground) 30%, transparent)"
 
 export function ProfileAnnotations() {
   return (
@@ -54,7 +50,7 @@ export function ProfileAnnotations() {
         <RoughNotation
           animationDelay={250}
           animationDuration={1200}
-          color={roughStrokeColor}
+          color={sketchColor}
           padding={2}
           show
           strokeWidth={1.2}
@@ -64,7 +60,7 @@ export function ProfileAnnotations() {
         </RoughNotation>
       </div>
       <Arrow
-        className="absolute -left-35 -top-11 h-17 w-32 -rotate-9 text-foreground/16 dark:text-foreground/25"
+        className="absolute -left-35 -top-11 h-17 w-32 -rotate-9 text-foreground/30"
         path="M10 20 C64 4, 120 17, 174 82"
         tip="M163 77 L178 88 L159 91"
       />
@@ -73,7 +69,7 @@ export function ProfileAnnotations() {
         <RoughNotation
           animationDelay={450}
           animationDuration={1200}
-          color={roughHighlightColor}
+          color={sketchColor}
           padding={3}
           show
           strokeWidth={0.9}
@@ -84,7 +80,7 @@ export function ProfileAnnotations() {
         mind
       </div>
       <Arrow
-        className="absolute left-14 -top-13 h-18 w-34 rotate-8 text-foreground/16 dark:text-foreground/25"
+        className="absolute left-14 -top-13 h-18 w-34 rotate-8 text-foreground/30"
         path="M205 18 C158 10, 112 26, 50 91"
         tip="M69 87 L47 95 L56 74"
       />
@@ -94,7 +90,7 @@ export function ProfileAnnotations() {
         <RoughNotation
           animationDelay={650}
           animationDuration={1300}
-          color={roughStrokeColor}
+          color={sketchColor}
           padding={4}
           show
           strokeWidth={1.2}
@@ -104,7 +100,7 @@ export function ProfileAnnotations() {
         </RoughNotation>
       </div>
       <Arrow
-        className="absolute left-13 top-0 h-13 w-34 -rotate-2 text-foreground/16 dark:text-foreground/25"
+        className="absolute left-13 top-0 h-13 w-34 -rotate-2 text-foreground/30"
         path="M203 22 C150 16, 99 30, 48 65"
         tip="M68 62 L45 67 L58 49"
       />
@@ -113,7 +109,7 @@ export function ProfileAnnotations() {
         <RoughNotation
           animationDelay={850}
           animationDuration={1300}
-          color={roughStrokeColor}
+          color={sketchColor}
           padding={4}
           show
           strokeWidth={1.1}
@@ -124,7 +120,7 @@ export function ProfileAnnotations() {
         thinker
       </div>
       <Arrow
-        className="absolute left-12 top-8 h-17 w-34 rotate-10 text-foreground/16 dark:text-foreground/25"
+        className="absolute left-12 top-8 h-17 w-34 rotate-10 text-foreground/30"
         path="M207 103 C157 103, 101 79, 44 24"
         tip="M54 45 L41 21 L69 31"
       />
@@ -134,7 +130,7 @@ export function ProfileAnnotations() {
         <RoughNotation
           animationDelay={1050}
           animationDuration={1300}
-          color={roughStrokeColor}
+          color={sketchColor}
           padding={2}
           show
           strokeWidth={1.2}
@@ -144,7 +140,7 @@ export function ProfileAnnotations() {
         </RoughNotation>
       </div>
       <Arrow
-        className="absolute -left-38 top-7 h-17 w-34 -rotate-5 text-foreground/16 dark:text-foreground/25"
+        className="absolute -left-38 top-7 h-17 w-34 -rotate-5 text-foreground/30"
         path="M10 103 C67 103, 119 81, 174 28"
         tip="M151 35 L178 24 L168 52"
       />
