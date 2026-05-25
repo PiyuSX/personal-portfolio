@@ -85,6 +85,11 @@ function useDocumentColorScheme() {
 export function GitHubActivity() {
   const { containerRef, sizing } = useCalendarSizing()
   const colorScheme = useDocumentColorScheme()
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <section
@@ -120,32 +125,51 @@ export function GitHubActivity() {
             className="github-calendar-frame max-w-full overflow-hidden"
             ref={containerRef}
           >
-            <GitHubCalendar
-              blockMargin={sizing.blockMargin}
-              blockRadius={2}
-              blockSize={sizing.blockSize}
-              colorScheme={colorScheme}
-              errorMessage="Unable to load GitHub activity right now."
-              fontSize={sizing.fontSize}
-              labels={{
-                legend: {
-                  less: "Less",
-                  more: "More",
-                },
-                totalCount: "{{count}} contributions in {{year}}",
-              }}
-              showColorLegend={!sizing.isCompact}
-              showMonthLabels={!sizing.isCompact}
-              showTotalCount={!sizing.isCompact}
-              showWeekdayLabels={false}
-              theme={{
-                dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
-                light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-              }}
-              key={colorScheme}
-              username={site.githubUsername}
-              year="last"
-            />
+            {isMounted ? (
+              <GitHubCalendar
+                blockMargin={sizing.blockMargin}
+                blockRadius={2}
+                blockSize={sizing.blockSize}
+                colorScheme={colorScheme}
+                errorMessage="Unable to load GitHub activity right now."
+                fontSize={sizing.fontSize}
+                labels={{
+                  legend: {
+                    less: "Less",
+                    more: "More",
+                  },
+                  totalCount: "{{count}} contributions in {{year}}",
+                }}
+                showColorLegend={!sizing.isCompact}
+                showMonthLabels={!sizing.isCompact}
+                showTotalCount={!sizing.isCompact}
+                showWeekdayLabels={false}
+                theme={{
+                  dark: [
+                    "#161b22",
+                    "#0e4429",
+                    "#006d32",
+                    "#26a641",
+                    "#39d353",
+                  ],
+                  light: [
+                    "#ebedf0",
+                    "#9be9a8",
+                    "#40c463",
+                    "#30a14e",
+                    "#216e39",
+                  ],
+                }}
+                key={colorScheme}
+                username={site.githubUsername}
+                year="last"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                className="h-[88px] w-full max-w-full bg-muted/25"
+              />
+            )}
           </div>
         </div>
       </BlurFade>
