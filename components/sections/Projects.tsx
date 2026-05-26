@@ -5,7 +5,11 @@ import { BlurFade } from "@/components/ui/blur-fade"
 
 export function Projects() {
   return (
-    <section id="projects" className="scroll-mt-20 border-b border-border py-12 sm:py-14">
+    <section
+      data-physics-source
+      id="projects"
+      className="scroll-mt-20 border-b border-border py-12 sm:py-14"
+    >
       <BlurFade inView>
         <div className="grid gap-6 sm:grid-cols-[160px_minmax(0,1fr)]">
           <p className="text-xs font-medium text-muted-foreground uppercase">

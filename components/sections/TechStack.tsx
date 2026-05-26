@@ -38,7 +38,7 @@ const skillIcons: Record<(typeof site.skills)[number], IconType> = {
   Go: SiGo,
 }
 
-function TechBadge({ skill }: { skill: string }) {
+export function TechBadge({ skill }: { skill: string }) {
   const Icon = skillIcons[skill as (typeof site.skills)[number]]
 
   return (
@@ -56,7 +56,11 @@ function TechBadge({ skill }: { skill: string }) {
 
 export function TechStack() {
   return (
-    <section id="stack" className="relative scroll-mt-20 border-b border-border py-12 sm:py-14">
+    <section
+      data-physics-source
+      id="stack"
+      className="relative scroll-mt-20 border-b border-border py-12 sm:py-14"
+    >
       <StackThinkingAnnotation />
       <BlurFade inView>
         <div className="grid gap-6 sm:grid-cols-[160px_minmax(0,1fr)]">

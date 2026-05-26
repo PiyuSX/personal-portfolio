@@ -8,6 +8,10 @@ import {
   LinkedInIcon,
 } from "@/components/icons/BrandIcons"
 import { ProfileAnnotations } from "@/components/decorations/ProfileAnnotations"
+import {
+  PhysicsSwitch,
+  type PhysicsMode,
+} from "@/components/physics/PhysicsSwitch"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { HyperText } from "@/components/ui/hyper-text"
 
@@ -18,10 +22,16 @@ const icons = {
   Instagram: InstagramIcon,
 }
 
-export function Hero() {
+type HeroProps = {
+  physicsMode: PhysicsMode
+  setPhysicsMode: (mode: PhysicsMode) => void
+}
+
+export function Hero({ physicsMode, setPhysicsMode }: HeroProps) {
   return (
     <section id="home" className="relative scroll-mt-6 py-16 sm:py-20 lg:py-24 xl:pt-39">
-      <div className="border-b border-border pb-14">
+      <PhysicsSwitch mode={physicsMode} setMode={setPhysicsMode} />
+      <div className="border-b border-border pb-14" data-physics-source>
         <BlurFade inView>
           <div className="flex items-center gap-4 xl:mb-16">
             <div className="relative inline-flex">

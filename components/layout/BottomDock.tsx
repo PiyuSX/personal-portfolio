@@ -34,7 +34,10 @@ const iconButtonClass =
 
 export function BottomDock() {
   return (
-    <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-2 sm:bottom-6">
+    <div
+      data-physics-source
+      className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-2 sm:bottom-6"
+    >
       <Dock
         iconSize={30}
         iconMagnification={36}

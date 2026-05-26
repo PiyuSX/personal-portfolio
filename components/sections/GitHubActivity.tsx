@@ -103,13 +103,80 @@ function useDocumentColorScheme() {
   return colorScheme
 }
 
-export function GitHubActivity() {
+export function GitHubActivityCard({ className = "" }: { className?: string }) {
   const { containerRef, sizing } = useCalendarSizing()
   const colorScheme = useDocumentColorScheme()
   const isMounted = useIsMounted()
 
   return (
+    <div
+      className={`max-w-full overflow-hidden border border-border bg-card p-3 sm:p-5 ${className}`}
+    >
+      <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground sm:mb-5">
+        <GitHubIcon aria-hidden className="size-4" />
+        <span className="font-medium text-foreground">
+          {site.githubUsername}
+        </span>
+      </div>
+
+      <div
+        className="github-calendar-frame max-w-full overflow-hidden"
+        ref={containerRef}
+      >
+        {isMounted ? (
+          <GitHubCalendar
+            blockMargin={sizing.blockMargin}
+            blockRadius={2}
+            blockSize={sizing.blockSize}
+            colorScheme={colorScheme}
+            errorMessage="Unable to load GitHub activity right now."
+            fontSize={sizing.fontSize}
+            labels={{
+              legend: {
+                less: "Less",
+                more: "More",
+              },
+              totalCount: "{{count}} contributions in {{year}}",
+            }}
+            showColorLegend={!sizing.isCompact}
+            showMonthLabels={!sizing.isCompact}
+            showTotalCount={!sizing.isCompact}
+            showWeekdayLabels={false}
+            theme={{
+              dark: [
+                "#161b22",
+                "#0e4429",
+                "#006d32",
+                "#26a641",
+                "#39d353",
+              ],
+              light: [
+                "#ebedf0",
+                "#9be9a8",
+                "#40c463",
+                "#30a14e",
+                "#216e39",
+              ],
+            }}
+            key={colorScheme}
+            username={site.githubUsername}
+            year="last"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="h-[88px] w-full max-w-full bg-muted/25"
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+
+export function GitHubActivity() {
+  return (
     <section
+      data-physics-source
       id="github"
       className="relative scroll-mt-20 border-b border-border py-12 sm:py-14"
     >
@@ -131,65 +198,7 @@ export function GitHubActivity() {
       </BlurFade>
 
       <BlurFade delay={0.12} inView>
-        <div className="mt-7 max-w-full overflow-hidden border border-border bg-card p-3 sm:p-5">
-          <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground sm:mb-5">
-            <GitHubIcon aria-hidden className="size-4" />
-            <span className="font-medium text-foreground">
-              {site.githubUsername}
-            </span>
-          </div>
-
-          <div
-            className="github-calendar-frame max-w-full overflow-hidden"
-            ref={containerRef}
-          >
-            {isMounted ? (
-              <GitHubCalendar
-                blockMargin={sizing.blockMargin}
-                blockRadius={2}
-                blockSize={sizing.blockSize}
-                colorScheme={colorScheme}
-                errorMessage="Unable to load GitHub activity right now."
-                fontSize={sizing.fontSize}
-                labels={{
-                  legend: {
-                    less: "Less",
-                    more: "More",
-                  },
-                  totalCount: "{{count}} contributions in {{year}}",
-                }}
-                showColorLegend={!sizing.isCompact}
-                showMonthLabels={!sizing.isCompact}
-                showTotalCount={!sizing.isCompact}
-                showWeekdayLabels={false}
-                theme={{
-                  dark: [
-                    "#161b22",
-                    "#0e4429",
-                    "#006d32",
-                    "#26a641",
-                    "#39d353",
-                  ],
-                  light: [
-                    "#ebedf0",
-                    "#9be9a8",
-                    "#40c463",
-                    "#30a14e",
-                    "#216e39",
-                  ],
-                }}
-                key={colorScheme}
-                username={site.githubUsername}
-                year="last"
-              />
-            ) : (
-              <div
-                aria-hidden="true"
-                className="h-[88px] w-full max-w-full bg-muted/25"
-              />
-            )}
-          </div>
-        </div>
+        <GitHubActivityCard className="mt-7" />
       </BlurFade>
     </section>
   )

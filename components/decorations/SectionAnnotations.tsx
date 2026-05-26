@@ -37,34 +37,6 @@ function Connector({ className }: ConnectorProps) {
   )
 }
 
-export function AboutFundamentalsAnnotation() {
-  return (
-    <div
-      aria-hidden="true"
-      className={`${noteClass} top-17 -left-50 2xl:-left-56`}
-    >
-      <span className="block w-fit -rotate-8 leading-none">
-        <RoughNotation
-          animationDelay={250}
-          animationDuration={1200}
-          color={sketchColor}
-          customElement="span"
-          multiline={false}
-          padding={[0, 1, -3, 1]}
-          show
-          strokeWidth={1.2}
-          type="underline"
-        >
-          <span className="inline-block leading-none">fundamentals</span>
-        </RoughNotation>
-      </span>
-      <span className="mt-3 block w-fit translate-x-17 rotate-[-2deg] leading-none">
-        first
-      </span>
-    </div>
-  )
-}
-
 export function StackThinkingAnnotation() {
   return (
     <div

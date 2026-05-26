@@ -270,7 +270,8 @@ export function HangingLampToggle() {
         ref={buttonRef}
         type="button"
         aria-label="Pull lamp cord to toggle theme"
-        className="group pointer-events-auto relative h-full w-full text-foreground/35 opacity-90 outline-none transition-colors hover:text-foreground/50 focus-visible:text-foreground/50 dark:text-foreground/35 dark:hover:text-foreground/45"
+        className="no-physics group pointer-events-auto relative h-full w-full text-foreground/35 opacity-90 outline-none transition-colors hover:text-foreground/50 focus-visible:text-foreground/50 dark:text-foreground/35 dark:hover:text-foreground/45"
+        data-no-physics
         onClick={handleClick}
         onPointerCancel={stopDragging}
         onPointerDown={handlePointerDown}
@@ -395,22 +396,35 @@ export function HangingLampToggle() {
             </g>
           </g>
 
-          <g
-            className="text-foreground/30"
-            pointerEvents="none"
+        </svg>
+      </button>
+      <div
+        data-physics-source
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[245px] left-[24px] h-12 w-24 text-foreground/35"
+      >
+        <svg
+          aria-hidden="true"
+          className="absolute top-0 left-[38px] h-7 w-14 text-foreground/30"
+          fill="none"
+          viewBox="0 0 56 28"
+        >
+          <path
+            d="M0 23 C16 11, 32 6, 46 4"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="1.1"
-          >
-            <path d="M62 268 C78 256, 94 251, 108 249" />
-            <path d="M100 245 L110 249 L101 255" />
-          </g>
+          />
+          <path
+            d="M38 0 L48 4 L39 10"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.1"
+          />
         </svg>
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute top-[255px] left-[24px] -rotate-6 font-[var(--font-handwriting)] text-lg leading-none text-foreground/35 transition-colors"
-        >
+        <span className="absolute top-2.5 left-0 -rotate-6 font-[var(--font-handwriting)] text-lg leading-none text-foreground/35 transition-colors">
           <RoughNotation
             animationDuration={900}
             color="currentColor"
@@ -422,7 +436,7 @@ export function HangingLampToggle() {
             <span>pull</span>
           </RoughNotation>
         </span>
-      </button>
+      </div>
     </div>
   )
 }
