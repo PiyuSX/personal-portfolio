@@ -1,6 +1,8 @@
 import { BlurFade } from "@/components/ui/blur-fade"
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer
       data-physics-source
@@ -9,7 +11,7 @@ export function Footer() {
       <BlurFade inView>
         <div className="grid gap-5 sm:grid-cols-[160px_minmax(0,1fr)]">
           <p className="text-xs font-medium text-muted-foreground uppercase">
-            END / 2026
+            END
           </p>
 
           <div className="flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-end sm:justify-between">
@@ -20,7 +22,7 @@ export function Footer() {
               </span>
               <br />
               <span className="text-xs">
-                &copy; 2026. All rights reserved.
+                &copy; {currentYear}. All rights reserved.
               </span>
             </p>
 

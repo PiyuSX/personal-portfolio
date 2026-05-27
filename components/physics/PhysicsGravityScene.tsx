@@ -1,8 +1,8 @@
 "use client"
 
-import { FolderGit2, Home, Layers3, Mail, Moon, UserRound } from "lucide-react"
+import { Mail } from "lucide-react"
 import Image from "next/image"
-import type { ReactNode } from "react"
+import { Fragment, type ReactNode } from "react"
 
 import Gravity, { MatterBody } from "@/components/fancy/physics/gravity"
 import { contactLinks, site } from "@/components/data/site"
@@ -17,13 +17,11 @@ import { TechBadge } from "@/components/sections/TechStack"
 
 const bodyOptions = {
   density: 0.001,
-  friction: 0.95,
-  frictionAir: 0.018,
-  frictionStatic: 0.9,
+  friction: 0.55,
+  frictionAir: 0.014,
+  frictionStatic: 0.28,
   restitution: 0.04,
 }
-
-const dockIcons = [Home, UserRound, Layers3, GitHubIcon, FolderGit2, Mail, Moon]
 
 const socialIcons = {
   Email: Mail,
@@ -115,18 +113,34 @@ function SocialRow() {
   )
 }
 
-function DockClone() {
+function splitDescription(description: string, maxLineLength = 56) {
+  const lines: string[] = []
+  const words = description.split(" ")
+  let line = ""
+
+  for (const word of words) {
+    const nextLine = line ? `${line} ${word}` : word
+
+    if (line && nextLine.length > maxLineLength) {
+      lines.push(line)
+      line = word
+    } else {
+      line = nextLine
+    }
+  }
+
+  if (line) {
+    lines.push(line)
+  }
+
+  return lines
+}
+
+function ProjectLabel({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-10 items-center gap-0.5 rounded-md border border-border bg-background/75 p-1 shadow-none backdrop-blur-md dark:bg-black/45">
-      {dockIcons.map((Icon, index) => (
-        <span
-          className="flex size-8 items-center justify-center rounded-full text-muted-foreground"
-          key={index}
-        >
-          <Icon aria-hidden className="size-4" />
-        </span>
-      ))}
-    </div>
+    <span className="w-fit border border-border px-2 py-1 text-[11px] text-muted-foreground uppercase">
+      {children}
+    </span>
   )
 }
 
@@ -139,6 +153,8 @@ export function PhysicsGravityScene({
 }) {
   const gravity = { x: 0, y: 1.25 }
   const sceneKey = `${mode}-${Math.round(sceneHeight)}`
+  const currentYear = new Date().getFullYear()
+  const footerBaseY = Math.max(0, sceneHeight - 230)
 
   return (
     <div
@@ -352,32 +368,64 @@ export function PhysicsGravityScene({
             Real projects I am building and improving.
           </p>
         </MatterBody>
-        {site.projects.map((project, index) => (
-          <MatterBody
-            angle={index % 2 === 0 ? -2 : 2}
-            key={project.title}
-            matterBodyOptions={bodyOptions}
-            x="53%"
-            y={2070 + index * 120}
-          >
-            <article className="grid w-[680px] gap-3 border-y border-border py-5 sm:grid-cols-[2rem_minmax(0,1fr)_9rem] sm:items-start">
-              <span className="text-xs text-muted-foreground">
-                0{index + 1}
-              </span>
-              <div>
+        {site.projects.map((project, index) => {
+          const y = 2060 + index * 140
+          const descriptionLines = splitDescription(project.description)
+
+          return (
+            <Fragment key={project.title}>
+              <MatterBody
+                angle={-1}
+                matterBodyOptions={bodyOptions}
+                x="53%"
+                y={y - 35}
+              >
+                <div className="h-px w-56 bg-border" />
+              </MatterBody>
+              <MatterBody
+                angle={-3}
+                matterBodyOptions={bodyOptions}
+                x="40%"
+                y={y}
+              >
+                <span className="text-xs text-muted-foreground">
+                  0{index + 1}
+                </span>
+              </MatterBody>
+              <MatterBody
+                angle={2}
+                matterBodyOptions={bodyOptions}
+                x="47%"
+                y={y}
+              >
                 <span className="text-base font-medium tracking-normal text-foreground">
                   {project.title}
                 </span>
-                <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-                  {project.description}
-                </p>
-              </div>
-              <span className="w-fit border border-border px-2 py-1 text-[11px] text-muted-foreground uppercase">
-                {project.label}
-              </span>
-            </article>
-          </MatterBody>
-        ))}
+              </MatterBody>
+              {descriptionLines.map((line, lineIndex) => (
+                <MatterBody
+                  angle={lineIndex % 2 === 0 ? -1.5 : 1.5}
+                  key={`${project.title}-${lineIndex}`}
+                  matterBodyOptions={bodyOptions}
+                  x="53%"
+                  y={y + 38 + lineIndex * 30}
+                >
+                  <TextLine className="text-sm leading-6 text-muted-foreground">
+                    {line}
+                  </TextLine>
+                </MatterBody>
+              ))}
+              <MatterBody
+                angle={3}
+                matterBodyOptions={bodyOptions}
+                x="70%"
+                y={y}
+              >
+                <ProjectLabel>{project.label}</ProjectLabel>
+              </MatterBody>
+            </Fragment>
+          )
+        })}
 
         <MatterBody angle={-8} matterBodyOptions={bodyOptions} x="76%" y={2290}>
           <Note>build - break - improve</Note>
@@ -392,6 +440,58 @@ export function PhysicsGravityScene({
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="58%" y={2400}>
           <SocialRow />
+        </MatterBody>
+
+        <MatterBody
+          angle={-1}
+          matterBodyOptions={bodyOptions}
+          x="50%"
+          y={footerBaseY}
+        >
+          <div className="h-px w-[680px] bg-border" />
+        </MatterBody>
+        <MatterBody
+          angle={-3}
+          matterBodyOptions={bodyOptions}
+          x="42%"
+          y={footerBaseY + 45}
+        >
+          <p className="text-xs font-medium text-muted-foreground uppercase">
+            END
+          </p>
+        </MatterBody>
+        <MatterBody
+          angle={2}
+          matterBodyOptions={bodyOptions}
+          x="56%"
+          y={footerBaseY + 46}
+        >
+          <TextLine className="text-sm leading-6 text-muted-foreground">
+            Designed and developed by{" "}
+            <span className="font-medium text-foreground">
+              Piyush Rajbanshi
+            </span>
+          </TextLine>
+        </MatterBody>
+        <MatterBody
+          angle={-2}
+          matterBodyOptions={bodyOptions}
+          x="55%"
+          y={footerBaseY + 80}
+        >
+          <p className="whitespace-nowrap text-xs text-muted-foreground">
+            &copy; {currentYear}. All rights reserved.
+          </p>
+        </MatterBody>
+        <MatterBody
+          angle={3}
+          matterBodyOptions={bodyOptions}
+          x="71%"
+          y={footerBaseY + 78}
+        >
+          <p className="whitespace-nowrap text-xs font-medium text-muted-foreground uppercase">
+            Back to top
+          </p>
         </MatterBody>
 
         <MatterBody angle={-6} matterBodyOptions={bodyOptions} x="90%" y={305}>
@@ -421,9 +521,6 @@ export function PhysicsGravityScene({
               pull
             </span>
           </div>
-        </MatterBody>
-        <MatterBody matterBodyOptions={bodyOptions} x="50%" y={sceneHeight - 80}>
-          <DockClone />
         </MatterBody>
       </Gravity>
     </div>

@@ -87,7 +87,7 @@ export const MatterBody = ({
     isStatic: false,
   },
   bodyType = "rectangle",
-  collisionPadding = 3,
+  collisionPadding = 0,
   isDraggable = true,
   sampleLength = 15,
   x = 0,

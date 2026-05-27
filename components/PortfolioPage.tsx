@@ -8,6 +8,7 @@ import { PhysicsGravityScene } from "@/components/physics/PhysicsGravityScene"
 import type { PhysicsMode } from "@/components/physics/PhysicsSwitch"
 import { About } from "@/components/sections/About"
 import { Contact } from "@/components/sections/Contact"
+import { Footer } from "@/components/sections/Footer"
 import { GitHubActivity } from "@/components/sections/GitHubActivity"
 import { Hero } from "@/components/sections/Hero"
 import { Projects } from "@/components/sections/Projects"
@@ -84,6 +85,7 @@ export function PortfolioPage() {
         <GitHubActivity />
         <Projects />
         <Contact />
+        <Footer />
       </main>
       <BottomDock />
 
