@@ -18,9 +18,9 @@ import { TechBadge } from "@/components/sections/TechStack"
 const bodyOptions = {
   density: 0.001,
   friction: 0.55,
-  frictionAir: 0.014,
+  frictionAir: 0.02,
   frictionStatic: 0.28,
-  restitution: 0.04,
+  restitution: 0,
 }
 
 const socialIcons = {

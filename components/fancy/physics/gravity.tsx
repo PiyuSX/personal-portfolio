@@ -160,7 +160,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
     const engine = useRef(
       Engine.create({
         constraintIterations: 4,
-        enableSleeping: false,
+        enableSleeping: true,
         positionIterations: 20,
         velocityIterations: 12,
       })
@@ -247,7 +247,8 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
               : -0.7 - (bodyIndex % 4) * 0.16
           const angularVelocity = ((bodyIndex % 9) - 4) * 0.0025
 
-          body.slop = 0
+          body.sleepThreshold = 28
+          body.slop = 0.04
           element.style.backfaceVisibility = "hidden"
           element.style.transformOrigin = "50% 50%"
           element.style.willChange = "transform"
