@@ -175,7 +175,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 
     const isRunning = useRef(false)
 
-    // Register Matter.js body in the physics world
     const registerElement = useCallback(
       (id: string, element: HTMLElement, props: MatterBodyProps) => {
         if (!canvas.current) return
@@ -262,7 +261,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       [debug, gravity.y]
     )
 
-    // Unregister Matter.js body from the physics world
     const unregisterElement = useCallback((id: string) => {
       const body = bodiesMap.current.get(id)
       if (body) {
@@ -346,9 +344,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
         },
       })
 
-      // Add walls
       const walls = [
-        // Floor
         Bodies.rectangle(width / 2, height + 10, width, 20, {
           isStatic: true,
           friction: 1,
@@ -357,7 +353,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           },
         }),
 
-        // Right wall
         Bodies.rectangle(width + 10, height / 2, 20, height, {
           isStatic: true,
           friction: 1,
@@ -366,7 +361,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
           },
         }),
 
-        // Left wall
         Bodies.rectangle(-10, height / 2, 20, height, {
           isStatic: true,
           friction: 1,
@@ -456,7 +450,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
       }
     }, [addTopWall, autoStart, debug, grabCursor, gravity.x, gravity.y, startElementSync, startEngine])
 
-    // Clear the Matter.js world
     const clearRenderer = useCallback(() => {
       stopElementSync()
 
@@ -490,7 +483,6 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 
       setCanvasSize({ width: newWidth, height: newHeight })
 
-      // Clear and reinitialize
       clearRenderer()
       initializeRenderer()
     }, [clearRenderer, initializeRenderer, resetOnResize])

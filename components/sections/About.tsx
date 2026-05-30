@@ -1,4 +1,4 @@
-import { site } from "@/components/data/site"
+import { siteConfig } from "@/components/data/site"
 import { BlurFade } from "@/components/ui/blur-fade"
 
 export function About() {
@@ -16,9 +16,9 @@ export function About() {
           <div className="border-l border-border pl-5">
             <h2 className="text-2xl font-semibold tracking-normal">About</h2>
             <p className="mt-4 max-w-2xl text-pretty text-sm leading-7 text-muted-foreground sm:text-base">
-              I&rsquo;m {site.name}, a STEM-focused learner from {site.location}.
-              I&rsquo;m building my foundation in code, math, and systems as I
-              move toward Computer Engineering.
+              I&rsquo;m {siteConfig.name}, a STEM-focused learner from{" "}
+              {siteConfig.location}. I&rsquo;m building my foundation in code,
+              math, and systems as I move toward Computer Engineering.
             </p>
           </div>
         </div>

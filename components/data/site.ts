@@ -11,7 +11,16 @@ export type Project = {
   label: string
 }
 
-export const site = {
+export const navLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Stack", href: "#stack" },
+  { label: "GitHub Activity", href: "#github" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+] as const
+
+export const siteConfig = {
   name: "Piyushee",
   title: "Code. Math. Systems.",
   description:
@@ -53,8 +62,8 @@ export const site = {
 } as const
 
 export const contactLinks = [
-  { label: "Email", href: site.links.email },
-  { label: "GitHub", href: site.links.github, external: true },
-  { label: "LinkedIn", href: site.links.linkedin, external: true },
-  { label: "Instagram", href: site.links.instagram, external: true },
+  { label: "Email", href: siteConfig.links.email },
+  { label: "GitHub", href: siteConfig.links.github, external: true },
+  { label: "LinkedIn", href: siteConfig.links.linkedin, external: true },
+  { label: "Instagram", href: siteConfig.links.instagram, external: true },
 ] as const satisfies readonly SocialLink[]

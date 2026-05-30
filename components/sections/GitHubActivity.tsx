@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { GitHubCalendar } from "react-github-calendar"
 
-import { site } from "@/components/data/site"
+import { siteConfig } from "@/components/data/site"
 import { ActivityConsistencyAnnotation } from "@/components/decorations/SectionAnnotations"
 import { GitHubIcon } from "@/components/icons/BrandIcons"
 import { BlurFade } from "@/components/ui/blur-fade"
@@ -115,7 +115,7 @@ export function GitHubActivityCard({ className = "" }: { className?: string }) {
       <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground sm:mb-5">
         <GitHubIcon aria-hidden className="size-4" />
         <span className="font-medium text-foreground">
-          {site.githubUsername}
+          {siteConfig.githubUsername}
         </span>
       </div>
 
@@ -159,7 +159,7 @@ export function GitHubActivityCard({ className = "" }: { className?: string }) {
               ],
             }}
             key={colorScheme}
-            username={site.githubUsername}
+            username={siteConfig.githubUsername}
             year="last"
           />
         ) : (

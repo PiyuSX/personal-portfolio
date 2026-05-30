@@ -1,4 +1,4 @@
-import { site } from "@/components/data/site"
+import { siteConfig } from "@/components/data/site"
 import { StackThinkingAnnotation } from "@/components/decorations/SectionAnnotations"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { Marquee } from "@/components/ui/marquee"
@@ -19,10 +19,10 @@ import {
 } from "react-icons/si"
 import type { IconType } from "react-icons"
 
-const firstRibbon = site.skills.slice(0, 7)
-const secondRibbon = site.skills.slice(7)
+const firstRibbon = siteConfig.skills.slice(0, 7)
+const secondRibbon = siteConfig.skills.slice(7)
 
-const skillIcons: Record<(typeof site.skills)[number], IconType> = {
+const skillIcons: Record<(typeof siteConfig.skills)[number], IconType> = {
   HTML: SiHtml5,
   CSS: SiCss,
   JavaScript: SiJavascript,
@@ -39,7 +39,7 @@ const skillIcons: Record<(typeof site.skills)[number], IconType> = {
 }
 
 export function TechBadge({ skill }: { skill: string }) {
-  const Icon = skillIcons[skill as (typeof site.skills)[number]]
+  const Icon = skillIcons[skill as (typeof siteConfig.skills)[number]]
 
   return (
     <span className="tech-badge-shine group relative inline-flex items-center gap-2 overflow-hidden border border-border/70 bg-background/40 px-3 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm transition-colors duration-300 hover:border-foreground/40 hover:bg-foreground/[0.06] hover:text-foreground">

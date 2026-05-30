@@ -1,19 +1,14 @@
 "use client"
 
-import { Mail } from "lucide-react"
 import Image from "next/image"
 import { Fragment, type ReactNode } from "react"
 
 import Gravity, { MatterBody } from "@/components/fancy/physics/gravity"
-import { contactLinks, site } from "@/components/data/site"
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-} from "@/components/icons/BrandIcons"
+import { contactLinks, siteConfig } from "@/components/data/site"
 import type { PhysicsMode } from "@/components/physics/PhysicsSwitch"
 import { GitHubActivityCard } from "@/components/sections/GitHubActivity"
 import { TechBadge } from "@/components/sections/TechStack"
+import { socialIcons } from "@/components/social/social-icons"
 
 const bodyOptions = {
   density: 0.001,
@@ -21,13 +16,6 @@ const bodyOptions = {
   frictionAir: 0.02,
   frictionStatic: 0.28,
   restitution: 0,
-}
-
-const socialIcons = {
-  Email: Mail,
-  GitHub: GitHubIcon,
-  LinkedIn: LinkedInIcon,
-  Instagram: InstagramIcon,
 }
 
 function Note({ children }: { children: ReactNode }) {
@@ -231,7 +219,7 @@ export function PhysicsGravityScene({
             alt=""
             className="size-16 rounded-full border border-border object-cover grayscale"
             height={56}
-            src={site.profileImage}
+            src={siteConfig.profileImage}
             width={56}
           />
         </MatterBody>
@@ -242,12 +230,12 @@ export function PhysicsGravityScene({
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="42%" y={330}>
           <h1 className="text-5xl font-semibold tracking-normal text-foreground">
-            {site.name}
+            {siteConfig.name}
           </h1>
         </MatterBody>
         <MatterBody angle={2} matterBodyOptions={bodyOptions} x="45%" y={390}>
           <p className="text-2xl font-medium tracking-normal text-foreground/90">
-            {site.title}
+            {siteConfig.title}
           </p>
         </MatterBody>
         <MatterBody angle={-4} matterBodyOptions={bodyOptions} x="42%" y={455}>
@@ -262,8 +250,8 @@ export function PhysicsGravityScene({
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="43%" y={540}>
           <p className="text-sm text-muted-foreground">
-            {site.location} <span aria-hidden>&middot;</span> Future Computer
-            Engineering
+            {siteConfig.location} <span aria-hidden>&middot;</span> Future
+            Computer Engineering
           </p>
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="36%" y={610}>
@@ -283,7 +271,8 @@ export function PhysicsGravityScene({
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="63%" y={960}>
           <TextLine className="text-sm leading-7 text-muted-foreground sm:text-base">
-            I&rsquo;m {site.name}, a STEM-focused learner from {site.location}.
+            I&rsquo;m {siteConfig.name}, a STEM-focused learner from{" "}
+            {siteConfig.location}.
           </TextLine>
         </MatterBody>
         <MatterBody matterBodyOptions={bodyOptions} x="64%" y={995}>
@@ -316,7 +305,7 @@ export function PhysicsGravityScene({
             Tools I am learning and using.
           </p>
         </MatterBody>
-        {site.skills.map((skill, index) => (
+        {siteConfig.skills.map((skill, index) => (
           <MatterBody
             angle={index % 2 === 0 ? -2 : 2}
             key={skill}
@@ -368,7 +357,7 @@ export function PhysicsGravityScene({
             Real projects I am building and improving.
           </p>
         </MatterBody>
-        {site.projects.map((project, index) => {
+        {siteConfig.projects.map((project, index) => {
           const y = 2060 + index * 140
           const descriptionLines = splitDescription(project.description)
 

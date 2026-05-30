@@ -1,26 +1,14 @@
-import { Mail } from "lucide-react"
 import Image from "next/image"
 
-import { contactLinks, site } from "@/components/data/site"
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-} from "@/components/icons/BrandIcons"
+import { siteConfig } from "@/components/data/site"
 import { ProfileAnnotations } from "@/components/decorations/ProfileAnnotations"
 import {
   PhysicsSwitch,
   type PhysicsMode,
 } from "@/components/physics/PhysicsSwitch"
+import { SocialIconLinks } from "@/components/social/SocialIconLinks"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { HyperText } from "@/components/ui/hyper-text"
-
-const icons = {
-  Email: Mail,
-  GitHub: GitHubIcon,
-  LinkedIn: LinkedInIcon,
-  Instagram: InstagramIcon,
-}
 
 type HeroProps = {
   physicsMode: PhysicsMode
@@ -39,7 +27,7 @@ export function Hero({ physicsMode, setPhysicsMode }: HeroProps) {
                 alt="Piyushee profile"
                 className="size-16 rounded-full border border-border object-cover grayscale"
                 height={56}
-                src={site.profileImage}
+                src={siteConfig.profileImage}
                 width={56}
               />
               <ProfileAnnotations />
@@ -52,7 +40,7 @@ export function Hero({ physicsMode, setPhysicsMode }: HeroProps) {
 
         <BlurFade delay={0.08} inView>
           <h1 className="mt-8 text-4xl font-semibold tracking-normal text-balance sm:text-5xl">
-            {site.name}
+            {siteConfig.name}
           </h1>
         </BlurFade>
 
@@ -64,43 +52,25 @@ export function Hero({ physicsMode, setPhysicsMode }: HeroProps) {
             duration={700}
             startOnView
           >
-            {site.title}
+            {siteConfig.title}
           </HyperText>
         </BlurFade>
 
         <BlurFade className="w-full" delay={0.2} inView>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground">
-            {site.description}
+            {siteConfig.description}
           </p>
         </BlurFade>
 
         <BlurFade className="w-full" delay={0.23} inView>
           <p className="mt-5 text-sm text-muted-foreground">
-            {site.location} <span aria-hidden>&middot;</span> Future Computer
-            Engineering
+            {siteConfig.location} <span aria-hidden>&middot;</span> Future
+            Computer Engineering
           </p>
         </BlurFade>
 
         <BlurFade delay={0.28} inView>
-          <div className="mt-7 flex items-center gap-2">
-            {contactLinks.map((link) => {
-              const Icon = icons[link.label]
-              const isExternal = "external" in link && link.external
-
-              return (
-                <a
-                  aria-label={link.label}
-                  className="flex size-9 items-center justify-center border border-border bg-card text-muted-foreground transition hover:border-foreground/35 hover:text-foreground focus-visible:ring-2 focus-visible:ring-foreground/25 focus-visible:outline-none"
-                  href={link.href}
-                  key={link.label}
-                  rel={isExternal ? "noreferrer noopener" : undefined}
-                  target={isExternal ? "_blank" : undefined}
-                >
-                  <Icon aria-hidden className="size-4" />
-                </a>
-              )
-            })}
-          </div>
+          <SocialIconLinks />
         </BlurFade>
       </div>
     </section>

@@ -1,7 +1,43 @@
 import { ExternalLink } from "lucide-react"
 
-import { site } from "@/components/data/site"
+import { siteConfig } from "@/components/data/site"
 import { BlurFade } from "@/components/ui/blur-fade"
+
+type ProjectCardProps = {
+  project: (typeof siteConfig.projects)[number]
+  index: number
+}
+
+function ProjectCard({ project, index }: ProjectCardProps) {
+  return (
+    <BlurFade delay={index * 0.06} inView>
+      <article className="grid gap-3 py-5 sm:grid-cols-[2rem_minmax(0,1fr)_9rem] sm:items-start">
+        <span className="text-xs text-muted-foreground">0{index + 1}</span>
+        <div>
+          <a
+            aria-label={`Open ${project.title} on GitHub`}
+            className="group inline-flex items-center gap-2 text-base font-medium tracking-normal text-foreground transition hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-foreground/25 focus-visible:outline-none"
+            href={project.href}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            {project.title}
+            <ExternalLink
+              aria-hidden
+              className="size-3.5 opacity-55 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+            />
+          </a>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
+            {project.description}
+          </p>
+        </div>
+        <span className="w-fit border border-border px-2 py-1 text-[11px] text-muted-foreground uppercase">
+          {project.label}
+        </span>
+      </article>
+    </BlurFade>
+  )
+}
 
 export function Projects() {
   return (
@@ -25,35 +61,8 @@ export function Projects() {
       </BlurFade>
 
       <div className="mt-8 divide-y divide-border border-y border-border">
-        {site.projects.map((project, index) => (
-          <BlurFade delay={index * 0.06} inView key={project.title}>
-            <article className="grid gap-3 py-5 sm:grid-cols-[2rem_minmax(0,1fr)_9rem] sm:items-start">
-              <span className="text-xs text-muted-foreground">
-                0{index + 1}
-              </span>
-              <div>
-                <a
-                  aria-label={`Open ${project.title} on GitHub`}
-                  className="group inline-flex items-center gap-2 text-base font-medium tracking-normal text-foreground transition hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-foreground/25 focus-visible:outline-none"
-                  href={project.href}
-                  rel="noreferrer noopener"
-                  target="_blank"
-                >
-                  {project.title}
-                  <ExternalLink
-                    aria-hidden
-                    className="size-3.5 opacity-55 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-                  />
-                </a>
-                <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-                  {project.description}
-                </p>
-              </div>
-              <span className="w-fit border border-border px-2 py-1 text-[11px] text-muted-foreground uppercase">
-                {project.label}
-              </span>
-            </article>
-          </BlurFade>
+        {siteConfig.projects.map((project, index) => (
+          <ProjectCard index={index} key={project.title} project={project} />
         ))}
       </div>
     </section>

@@ -9,25 +9,26 @@ import {
 } from "lucide-react"
 import type { ComponentType } from "react"
 
+import { navLinks } from "@/components/data/site"
 import { GitHubIcon } from "@/components/icons/BrandIcons"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Dock, DockIcon } from "@/components/ui/dock"
 import { cn } from "@/lib/utils"
 
-type DockItem = {
-  label: string
-  href: string
-  icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>
-}
+type DockIconComponent = ComponentType<{
+  className?: string
+  "aria-hidden"?: boolean
+}>
 
-const dockItems: DockItem[] = [
-  { label: "Home", href: "#home", icon: Home },
-  { label: "About", href: "#about", icon: UserRound },
-  { label: "Stack", href: "#stack", icon: Layers3 },
-  { label: "GitHub Activity", href: "#github", icon: GitHubIcon },
-  { label: "Projects", href: "#projects", icon: FolderGit2 },
-  { label: "Contact", href: "#contact", icon: Mail },
-]
+const dockIcons: Record<(typeof navLinks)[number]["label"], DockIconComponent> =
+  {
+    Home,
+    About: UserRound,
+    Stack: Layers3,
+    "GitHub Activity": GitHubIcon,
+    Projects: FolderGit2,
+    Contact: Mail,
+  }
 
 const iconButtonClass =
   "flex size-10 items-center justify-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-foreground/8 hover:text-foreground focus-visible:ring-2 focus-visible:ring-foreground/30 dark:hover:bg-white/10 sm:size-8"
@@ -44,8 +45,8 @@ export function BottomDock() {
         iconDistance={90}
         className="mt-0 h-12 max-w-[calc(100vw-1rem)] gap-1 rounded-lg border-border bg-background/75 p-1.5 shadow-none backdrop-blur-md dark:bg-black/45 sm:h-10 sm:gap-0.5 sm:rounded-md sm:bg-background/65 sm:p-1 sm:dark:bg-black/35"
       >
-        {dockItems.map((item) => {
-          const Icon = item.icon
+        {navLinks.map((item) => {
+          const Icon = dockIcons[item.label]
 
           return (
             <DockIcon key={item.href} className="shrink-0">
